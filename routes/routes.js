@@ -1,6 +1,8 @@
 module.exports = function(app) {
   let heroes = require('../controllers/hero_controller');
 
+  app.get('/api/heroes', heroes.getHeroes);
+
   // error handlers
 
   // development error handler
