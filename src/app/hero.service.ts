@@ -14,7 +14,7 @@ const httpOptions = {
 })
 
 export class HeroService {
-  private heroesUrl = 'api/heroes';  // URL to web api
+  private heroesUrl = 'api/heroes';
 
   constructor(
     private http: HttpClient,
@@ -69,5 +69,24 @@ export class HeroService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  /** POST: add a new hero to the server */
+  addHero (hero: Hero): Observable<Hero> {
+    return this.http.post<Hero>(this.heroesUrl, hero, httpOptions).pipe(
+      tap((h: Hero) => this.log(`added hero w/ id=${h.id}`)),
+      catchError(this.handleError<Hero>('addHero'))
+    );
+  }
+
+  /** DELETE: delete the hero from the server */
+  deleteHero (hero: Hero | number): Observable<Hero> {
+    const id = typeof hero === 'number' ? hero : hero.id;
+    const url = `${this.heroesUrl}/${id}`;
+
+    return this.http.delete<Hero>(url, httpOptions).pipe(
+      tap(_ => this.log(`deleted hero id=${id}`)),
+      catchError(this.handleError<Hero>('deleteHero'))
+    );
   }
 }
