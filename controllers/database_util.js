@@ -1,7 +1,34 @@
 let pg = require('pg');
 let config = process.env.DATABASE_URL;
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('heroes', 'postgres', 'm3mysql', {
+  host: 'localhost',
+  dialect: 'postgres',
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+  operatorsAliases: false
+});
+
+const Hero = sequelize.define("hero", {
+  id: { type: Sequelize.INTEGER, primaryKey: true },
+  name: Sequelize.TEXT
+}, {
+  freezeTableName: true,
+  createdAt: false,
+  updatedAt: false
+});
 
 module.exports = {
+
+  findAll: function(response) {
+    Hero.findAll().then(heroes => {
+      response.json(heroes);
+    })
+  },
 
   executeQueryWithResults: function(response, sql, values) {
 

@@ -6,5 +6,5 @@ exports.getHeroes = function(request, response) {
   let sql = "SELECT * " +
     "FROM hero ";
 
-  return db.executeQueryWithResults(response, sql);
+  return db.findAll(response);
 };
