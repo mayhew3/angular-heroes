@@ -31,7 +31,7 @@ exports.deleteHero = function(request, response) {
       id: request.params.hero_id
     }
   }).then(() => {
-    response.send("Success!");
+    response.send({msg: "Success!"});
   }).catch(error => {
     console.log("Deletion error: " + error);
     response.send("Deletion error: " + error);
