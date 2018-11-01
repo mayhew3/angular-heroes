@@ -7,6 +7,7 @@ module.exports = function(app) {
 
   router.route('/heroes')
     .get(heroes.getHeroes)
+    .put(heroes.updateHero)
     .post(heroes.addHero);
 
   router.route('/heroes/:hero_id')

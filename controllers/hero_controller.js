@@ -21,7 +21,7 @@ exports.addHero = function(request, response) {
     response.json(result.dataValues);
   }).catch(error => {
     console.error(error);
-    response.send("Connection error " + error);
+    response.send({msg: "Connection error " + error});
   })
 };
 
@@ -35,5 +35,21 @@ exports.deleteHero = function(request, response) {
   }).catch(error => {
     console.log("Deletion error: " + error);
     response.send("Deletion error: " + error);
+  });
+};
+
+exports.updateHero = function(request, response) {
+  let hero = request.body;
+
+  model.Hero.findByPk(hero.id).then(result => {
+    result.update(hero).then(() => {
+      response.json({msg: "Success!"});
+    }).catch(error => {
+      console.error(error);
+      response.send({msg: "Error updating hero: " + JSON.stringify(hero)})
+    });
+  }).catch(error => {
+    console.error(error);
+    response.send({msg: "Error finding hero: " + error});
   });
 };
