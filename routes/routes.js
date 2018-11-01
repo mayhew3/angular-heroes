@@ -6,7 +6,8 @@ module.exports = function(app) {
   let router = express.Router();
 
   router.route('/heroes')
-    .get(heroes.getHeroes);
+    .get(heroes.getHeroes)
+    .post(heroes.addHero);
 
   router.route('/heroes/:hero_id')
     .get(heroes.getHero);

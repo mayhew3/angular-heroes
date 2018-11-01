@@ -1,15 +1,12 @@
 const Sequelize = require('sequelize');
 const sequelize = require('./sequelize');
 
-module.exports = {
+exports.Hero = sequelize.sequelize.define("hero", {
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  name: Sequelize.TEXT
+}, {
+  freezeTableName: true,
+  createdAt: false,
+  updatedAt: false
+});
 
-  Hero: sequelize.sequelize.define("hero", {
-    id: { type: Sequelize.INTEGER, primaryKey: true },
-    name: Sequelize.TEXT
-  }, {
-    freezeTableName: true,
-    createdAt: false,
-    updatedAt: false
-  })
-
-};

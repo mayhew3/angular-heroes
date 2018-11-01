@@ -13,3 +13,14 @@ exports.getHero = function(request, response) {
     response.json(hero);
   })
 };
+
+exports.addHero = function(request, response) {
+  let hero = request.body;
+
+  model.Hero.create(hero).then((result) => {
+    response.json(result.dataValues);
+  }).catch(error => {
+    console.error(error);
+    response.send("Connection error " + error);
+  })
+};
