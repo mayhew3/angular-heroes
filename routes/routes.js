@@ -10,7 +10,8 @@ module.exports = function(app) {
     .post(heroes.addHero);
 
   router.route('/heroes/:hero_id')
-    .get(heroes.getHero);
+    .get(heroes.getHero)
+    .delete(heroes.deleteHero);
 
   app.use('/api', router);
 

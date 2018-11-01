@@ -24,3 +24,16 @@ exports.addHero = function(request, response) {
     response.send("Connection error " + error);
   })
 };
+
+exports.deleteHero = function(request, response) {
+  model.Hero.destroy({
+    where: {
+      id: request.params.hero_id
+    }
+  }).then(() => {
+    response.send("Success!");
+  }).catch(error => {
+    console.log("Deletion error: " + error);
+    response.send("Deletion error: " + error);
+  });
+};
