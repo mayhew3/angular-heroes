@@ -1,7 +1,17 @@
+let express = require('express');
+
 module.exports = function(app) {
   let heroes = require('../controllers/hero_controller');
 
-  app.get('/api/heroes', heroes.getHeroes);
+  let router = express.Router();
+
+  router.route('/heroes')
+    .get(heroes.getHeroes);
+
+  router.route('/heroes/:hero_id')
+    .get(heroes.getHero);
+
+  app.use('/api', router);
 
   // error handlers
 
