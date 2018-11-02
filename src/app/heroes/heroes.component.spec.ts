@@ -1,7 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeroesComponent } from './heroes.component';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {RouterLinkDirectiveStub} from '../../testing/router-link-directive-stub';
+import {HeroService} from '../hero.service';
+import {MockHeroService} from '../../testing/mock-hero-service';
 
 describe('HeroesComponent', () => {
   let component: HeroesComponent;
@@ -9,8 +11,13 @@ describe('HeroesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeroesComponent ],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [
+        HeroesComponent,
+        RouterLinkDirectiveStub
+      ],
+      providers: [
+        { provide: HeroService, useClass: MockHeroService }
+      ]
     })
     .compileComponents();
   }));

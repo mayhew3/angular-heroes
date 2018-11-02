@@ -1,3 +1,7 @@
+// export for convenience.
+export { ActivatedRoute } from '@angular/router';
+
+// #docregion activated-route-stub
 import { convertToParamMap, ParamMap, Params } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 
@@ -17,8 +21,13 @@ export class ActivatedRouteStub {
   /** The mock paramMap observable */
   readonly paramMap = this.subject.asObservable();
 
+  readonly snapshot = {
+    paramMap: undefined
+  };
+
   /** Set the paramMap observables's next value */
   setParamMap(params?: Params) {
     this.subject.next(convertToParamMap(params));
+    this.snapshot.paramMap = convertToParamMap(params);
   }
 }

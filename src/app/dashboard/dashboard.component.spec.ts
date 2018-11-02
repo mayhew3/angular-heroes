@@ -1,10 +1,11 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
-import {Observable, of} from 'rxjs';
 import {Hero} from '../hero';
 import {HeroService} from '../hero.service';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {RouterLinkDirectiveStub} from '../../testing/router-link-directive-stub';
+import {Component} from '@angular/core';
+import {MockHeroService} from '../../testing/mock-hero-service';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -16,12 +17,13 @@ describe('DashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        DashboardComponent
+        DashboardComponent,
+        RouterLinkDirectiveStub,
+        HeroSearchStubComponent
       ],
       providers: [
         { provide: HeroService, useClass: MockHeroService }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);
@@ -50,19 +52,6 @@ describe('DashboardComponent', () => {
 
 });
 
-class MockHeroService {
-  allHeroes = [
-    { id: 1, name: 'A'},
-    { id: 2, name: 'B'},
-    { id: 3, name: 'C'},
-    { id: 4, name: 'D'},
-    { id: 5, name: 'E'},
-    { id: 6, name: 'F'}
-  ];
 
-  /** GET heroes from the server */
-  getHeroes (): Observable<Hero[]> {
-    return of(this.allHeroes);
-  }
-
-}
+@Component({selector: 'app-hero-search', template: ''})
+class HeroSearchStubComponent {}
