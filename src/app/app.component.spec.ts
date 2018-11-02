@@ -1,6 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import {Component} from '@angular/core';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {RouterLinkDirectiveStub} from '../testing/router-link-directive-stub';
 
 describe('AppComponent', () => {
@@ -8,10 +8,9 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        RouterLinkDirectiveStub,
-        MessagesStubComponent,
-        RouterOutletStubComponent
+        RouterLinkDirectiveStub
       ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -34,10 +33,3 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain('Tour of Heroes');
   });
 });
-
-@Component({selector: 'app-messages', template: ''})
-class MessagesStubComponent {}
-
-// tslint:disable-next-line
-@Component({selector: 'router-outlet', template: ''})
-class RouterOutletStubComponent { }
