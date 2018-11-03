@@ -15,7 +15,7 @@ describe('HeroDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule],
+      imports: [ FormsModule ],
       declarations: [ HeroDetailComponent ],
       providers: [
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub({id: 99999}) },
@@ -33,6 +33,6 @@ describe('HeroDetailComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeDefined();
   });
 });
